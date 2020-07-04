@@ -1,7 +1,9 @@
 <?php  
 include ("connection.php");
 //  $connect = mysqli_connect("localhost", "fishopp2_furnit", "fslhggi2020@@@", "fishopp2_furniture");  
- if(!empty($_POST))  
+//if (!empty($_POST))  
+
+ if(!empty(($_REQUEST($_POST['add']))))
  {  
       $output = '';  
       $message = '';  
@@ -21,23 +23,23 @@ include ("connection.php");
 
            $sql = "  
            UPDATE pish_hikashop_product   
-           SET product_name ='$product_name',   
-           product_counting_unit ='$product_counting_unit',   
-           product_package_type ='$product_package_type',   
-           product_weight = '$product_weight',   
-           product_number_in_package = '$product_number_in_package',
-           product_delivery_time='$product_delivery_time',
-           product_msrp='$product_msrp',
-           product_sort_price='$product_sort_price',
-           product_sale_type='$product_sale_type'
+           SET product_name` ='$product_name',   
+           `product_counting_unit` ='$product_counting_unit',   
+           `product_package_type` ='$product_package_type',   
+           `product_weight` = '$product_weight',   
+           `product_number_in_package` = '$product_number_in_package',
+           `product_delivery_time`='$product_delivery_time',
+           `product_msrp`='$product_msrp',
+           `product_sort_price`='$product_sort_price',
+           `product_sale_type`='$product_sale_type'
            WHERE product_id='$product_id'";  
             $message = 'Data Updated';  
       }  
       else  
       {
            $sql = "  
-           INSERT INTO pish_hikashop_product(product_name, product_counting_unit,product_package_type,product_weight,product_number_in_package,
-           product_delivery_time,product_msrp,product_sort_price,product_sale_type)  
+           INSERT INTO pish_hikashop_product(`product_name`, `product_counting_unit`,`product_package_type`,`product_weight`,`product_number_in_package`,
+           `product_delivery_time`,`product_msrp,product_sort_price`,`product_sale_type`)  
            VALUES('$product_name', '$product_counting_unit', '$product_package_type', '$product_weight', '$product_number_in_package', '$product_delivery_time','$product_msrp', '$product_sort_price', '$product_sale_type');  
            ";  
           
