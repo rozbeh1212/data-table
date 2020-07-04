@@ -1,0 +1,5 @@
+[01-Jul-2020 06:17:33 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'fishopp2_furnit'@'localhost' (using password: YES) in /home/fishopp2/public_html/furniture/sample/index.php on line 2
+[01-Jul-2020 06:17:33 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/fishopp2/public_html/furniture/sample/index.php on line 4
+[01-Jul-2020 06:17:33 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/fishopp2/public_html/furniture/sample/index.php on line 32
+[01-Jul-2020 06:27:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'fishopp2_furnit'@'localhost' (using password: YES) in /home/fishopp2/public_html/furniture/sample/insert.php on line 2
+[01-Jul-2020 06:27:16 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/fishopp2/public_html/furniture/sample/insert.php on line 43
