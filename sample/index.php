@@ -28,13 +28,11 @@ $contents = json_decode($output, true);
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
      <title>فیشاپینگ | اصلاح اطلاعات کالا</title>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 
-
 <body>
-
      <br /><br />
      <div class="container" style="width:700px;">
           <h3 align="center">اصلاح اطلاعات کالا</h3>
@@ -50,7 +48,7 @@ $contents = json_decode($output, true);
                               <th width="28%">تصویر کالا</th>
                               <th width="40%">نام کالا</th>
                               <th width="8%">نمایش</th>
-                              < th width="8%">اصلاح</th>
+                              <th width="8%">اصلاح</th>
                          </tr>
                          <?php
                          if ($contents && count($contents) > 0) {
@@ -63,8 +61,7 @@ $contents = json_decode($output, true);
                                         <td><img src="<?php echo $product["product_image"]; ?>" /></td>
                                         <td><?php echo $product["product_name"]; ?></td>
                                         <td><button name="view" id="<?php echo $product["product_id"]; ?>" onclick="handleBoxClick(<?= $index ?>)" class="btn btn-info btn-xs">نمایش</button></td>
-                                        <td><input type="button" name="edit" value="اصلاح" id="<?php echo $product["product_id"]; ?>" class="btn btn-info btn-xs edit_data" data-backdrop="" /></td>
-
+                                        <td><input type="button" name="edit" value="اصلاح" id="<?php echo $product["product_id"]; ?>" class="btn btn-info btn-xs edit_data" /></td>
 
                                    </tr>
                               <?php
@@ -85,7 +82,6 @@ $contents = json_decode($output, true);
 
 </html>
 
-
 <div id="dataModal" class="modal fade">
      <div class="modal-dialog">
           <div class="modal-content">
@@ -101,7 +97,7 @@ $contents = json_decode($output, true);
           </div>
      </div>
 </div>
-<div id="add_data_Modal" class="modal fade" data-backdrop="false">
+<div id="add_data_Modal" class="modal fade">
      <div class="modal-dialog">
           <div class="modal-content">
                <div class="modal-header">
