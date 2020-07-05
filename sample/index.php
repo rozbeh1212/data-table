@@ -31,13 +31,17 @@ $contents = json_decode($output, true);
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
 
+     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 </head>
 
 <style>
      .modal-backdrop.fade.in {
           z-index: -1;
+
      }
 </style>
 
@@ -52,20 +56,23 @@ $contents = json_decode($output, true);
 
                $(".modal-backdrop").remove();
 
+          });
 
+          $('#example').DataTable({
+               responsive: true
           });
      </script>
 
 
      <br /><br />
-     <div class="container" style="width:700px;">
+     <div class="container" style="width:100%;">
           <h3 align="center">اصلاح اطلاعات کالا</h3>
           <br />
           <div class="table-responsive">
 
                <br />
                <div id="employee_table">
-                    <table class="table table-bordered">
+                    <table id="example " class="table table-responsive table-bordered w-auto">
                          <tr>
                               <th width="8%">ردیف</th>
                               <th width="8%">کد کالا</th>
