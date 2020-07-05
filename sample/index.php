@@ -27,12 +27,36 @@ $contents = json_decode($output, true);
 <head>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
      <title>فیشاپینگ | اصلاح اطلاعات کالا</title>
+
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 
+<style>
+     .modal-backdrop.fade.in {
+          z-index: -1;
+     }
+</style>
+
+
+
+
 <body>
+
+     <script>
+          jQuery(document).ready(function($) {
+
+
+               $(".modal-backdrop").remove();
+
+
+          });
+     </script>
+
+
      <br /><br />
      <div class="container" style="width:700px;">
           <h3 align="center">اصلاح اطلاعات کالا</h3>
@@ -78,6 +102,7 @@ $contents = json_decode($output, true);
                </div>
           </div>
      </div>
+
 </body>
 
 </html>
@@ -194,10 +219,6 @@ $contents = json_decode($output, true);
                          <p style="margin-left: 20px;">کد کالا:</p>
                          <p id="prod_id" style="font-weight: bold;"></p>
                     </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p class="close">بستن</p>
-
-                    </div>
                </div>
           </div>
      </div>
@@ -221,7 +242,7 @@ $contents = json_decode($output, true);
           document.getElementById("prod_image").src = selected_product['product_image'];
           document.getElementById("prod_brand").innerHTML = selected_product['category_name'];
           document.getElementById("prod_name").innerHTML = selected_product['product_name'];
-          document.getElementById("prod_counter").innerHTML = 'عدد';
+          document.getElementById("prod_counter").innerHTML = selected_product['product_counting_unit'];
           document.getElementById("prod_weight").innerHTML = selected_product['product_weight'];
           document.getElementById("prod_count").innerHTML = selected_product['product_quantity'];
           document.getElementById("prod_type").innerHTML = '';
@@ -243,8 +264,6 @@ $contents = json_decode($output, true);
                modal.style.display = "none";
           }
      }
-
-
      $(document).ready(function() {
           $('#add').click(function() {
                $('#insert').val("Insert");
