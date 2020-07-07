@@ -31,17 +31,13 @@ $contents = json_decode($output, true);
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
 
-     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
 </head>
 
 <style>
      .modal-backdrop.fade.in {
           z-index: -1;
-
      }
 </style>
 
@@ -56,10 +52,7 @@ $contents = json_decode($output, true);
 
                $(".modal-backdrop").remove();
 
-          });
 
-          $('#example').DataTable({
-               responsive: true
           });
      </script>
 
@@ -72,7 +65,7 @@ $contents = json_decode($output, true);
 
                <br />
                <div id="employee_table">
-                    <table id="example " class="table table-responsive table-bordered w-auto">
+                    <table class="table table-bordered">
                          <tr>
                               <th width="8%">ردیف</th>
                               <th width="8%">کد کالا</th>
@@ -91,7 +84,7 @@ $contents = json_decode($output, true);
                                         <td><?php echo $product["product_id"]; ?></td>
                                         <td><img src="<?php echo $product["product_image"]; ?>" /></td>
                                         <td><?php echo $product["product_name"]; ?></td>
-                                        <td><button name="view" id="<?php echo $product["product_id"]; ?>" onclick="handleBoxClick(<?= $index ?>)" class="btn btn-info btn-xs">نمایش</button></td>
+                                        <td><input type="button" name="delete" value="حذف" id="<?php echo $product["product_id"]; ?>" class="btn btn-info btn-xs delete_data" /></td>
                                         <td><input type="button" name="edit" value="اصلاح" id="<?php echo $product["product_id"]; ?>" class="btn btn-info btn-xs edit_data" /></td>
 
                                    </tr>
@@ -175,102 +168,17 @@ $contents = json_decode($output, true);
           </div>
      </div>
 </div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
-     <!-- Modal content -->
-     <div class="modal-content">
-          <div style="display: flex; flex-direction: column;">
-               <div style="display: flex; flex-direction: column;align-items: center">
-                    <img id="prod_image" style="max-width:100px;max-height:140px;" />
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">نام برند:</p>
-                         <p id="prod_brand" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">نام محصول:</p>
-                         <p id="prod_name" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">واحد شمارش: </p>
-                         <p id="prod_counter" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">وزن بسته بندی: </p>
-                         <p id="prod_weight" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">تعداد در بسته بندی:</p>
-                         <p id="prod_count" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">نوع بسته بندی:</p>
-                         <p id="prod_type" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">مدت زمان تحویل:</p>
-                         <p id="prod_time" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">نرخ مصرف کننده (تومان):</p>
-                         <p id="prod_consumer" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">نحوه تسویه حساب:</p>
-                         <p id="prod_equal" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">نرخ سوپرمارکت:</p>
-                         <p id="prod_supermarket" style="font-weight: bold;"></p>
-                    </div>
-                    <div style="display: flex; flex-direction: row;">
-                         <p style="margin-left: 20px;">کد کالا:</p>
-                         <p id="prod_id" style="font-weight: bold;"></p>
-                    </div>
+<div id="delete_data_Modal" class="modal fade">
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header">
+                    <h4 class="modal-title">کالا حذف شد. این فرآیند برگشت ناپذیر است.</h4>
                </div>
+
           </div>
      </div>
 </div>
-
-
 <script>
-     var products = <?php echo json_encode($contents); ?>;
-     var selected_index = 0;
-     var selected_product = {};
-     // Get the modal
-     var modal = document.getElementById("myModal");
-     // Get the button that opens the modal
-     //var productBoxs = document.getElementsByClassName("prodBox");
-     // Get the <span> element that closes the modal
-     var span = document.getElementsByClassName("close")[0];
-     // When the user clicks on the button, open the modal 
-     function handleBoxClick(id) {
-          selected_index = id;
-          selected_product = products[id];
-          document.getElementById("prod_image").src = selected_product['product_image'];
-          document.getElementById("prod_brand").innerHTML = selected_product['category_name'];
-          document.getElementById("prod_name").innerHTML = selected_product['product_name'];
-          document.getElementById("prod_counter").innerHTML = selected_product['product_counting_unit'];
-          document.getElementById("prod_weight").innerHTML = selected_product['product_weight'];
-          document.getElementById("prod_count").innerHTML = selected_product['product_quantity'];
-          document.getElementById("prod_type").innerHTML = '';
-          document.getElementById("prod_time").innerHTML = '';
-          document.getElementById("prod_consumer").innerHTML = selected_product['product_msrp'];
-          document.getElementById("prod_equal").innerHTML = '';
-          document.getElementById("prod_supermarket").innerHTML = selected_product['product_sort_price'];
-          document.getElementById("prod_id").innerHTML = selected_product['product_id'];
-          modal.style.display = "block";
-     }
-     // When the user clicks on <span> (x), close the modal
-     span.onclick = function() {
-          modal.style.display = "none";
-          console.log("yes");
-     }
-     // When the user clicks anywhere outside of the modal, close it
-     window.onclick = function(event) {
-          if (event.target == modal) {
-               modal.style.display = "none";
-          }
-     }
      $(document).ready(function() {
           $('#add').click(function() {
                $('#insert').val("Insert");
@@ -334,6 +242,20 @@ $contents = json_decode($output, true);
                               $('#add_data_Modal').modal('hide');
                          }
                     });
+               }
+          });
+     });
+     $(document).on('click', '.delete_data', function() {
+          var product_id = $(this).attr("id");
+          $.ajax({
+               url: "http://fishopping.ir/furniture/serverHypernetShowUnion/delete.php",
+               method: "POST",
+               data: {
+                    product_id: product_id
+               },
+               dataType: "json",
+               success: function(data) {
+                    $('#delete_data_Modal').modal('show');
                }
           });
      });
